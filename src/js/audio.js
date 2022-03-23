@@ -25,7 +25,7 @@ function addEvents(audio, events) {
 }
 
 function fireEvent(action, audioObject, extraDetail = {}) {
-	let playerType = (audioObject.targetObject.classList.contains('g-audio--block') ? 'block' : 'inline');
+	let playerType = audioObject.targetObject.classList.contains('g-audio--block') ? 'block' : 'inline';
 
 	const playButtonElement = audioObject.targetObject.getElementsByClassName('g-audio--playbutton')[0];
 	const contentElement = audioObject.targetObject.getElementsByClassName('g-audio-content')[0];
@@ -65,8 +65,8 @@ function unloadListener() {
 
 	// console.log('amt listened', +(this.amountListened / 1000).toFixed(2), (((this.amountListened / 1000) / (this.audioLength)) * 100).toFixed(2));
 	fireEvent('listened', this, {
-		amount: +(this.amountListened / 1000).toFixed(2),
-		amountPercentage: +(((this.amountListened / 1000) / (this.audioLength)) * 100).toFixed(2),
+		amount: Number(this.amountListened / 1000).toFixed(2),
+		amountPercentage: Number(((this.amountListened / 1000) / (this.audioLength)) * 100).toFixed(2),
 	});
 }
 
@@ -217,6 +217,20 @@ class AudioPlayer {
 			this.amountListened += Date.now() - this.dateTimePlayStart;
 			this.dateTimePlayStart = undefined;
 		}
+	}
+
+	// initialise g-audio components
+	static init (rootElement, options) {
+		if (!rootElement) {
+			rootElement = document.body;
+		}
+		if (!(rootElement instanceof HTMLElement)) {
+			rootElement = document.querySelector(rootElement);
+		}
+		if (rootElement instanceof HTMLElement && rootElement.matches('[class="g-audio"]')) {
+			return new Audio(rootElement, options);
+		}
+		return Array.from(rootElement.querySelectorAll('[class="g-audio"]'), rootEl => new Audio(rootEl, options));
 	}
 
 }

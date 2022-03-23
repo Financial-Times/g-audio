@@ -1,19 +1,24 @@
 {
+  "name": "@financial-times/g-audio",
+  "description": "IG audio player component",
+  "keywords": ["audio"],
+  "browser": "main.js",
   "private": true,
+  "type": "module",
   "devDependencies": {
-    "babel-preset-es2015": "^6.18.0",
-    "babelify": "^7.3.0",
-    "browserify": "^13.1.1",
-    "expect": "^1.20.2",
-    "karma": "^1.3.0",
-    "karma-babel-preprocessor": "^6.0.1",
-    "karma-browserify": "^5.1.0",
-    "karma-firefox-launcher": "^1.0.0",
-    "karma-mocha": "^1.3.0",
-    "mocha": "^3.2.0",
-    "watchify": "^3.7.0"
+    "eslint": "^7.19.0",
+    "eslint-config-origami-component": "^2.1.0",
+    "remark": "^12.0.1",
+    "remark-lint": "^7.0.1",
+    "remark-preset-lint-origami-component": "^2.0.0-beta.1",
+    "stylelint": "^13.9.0",
+    "stylelint-config-origami-component": "^1.0.4"
   },
-  "scripts": {
-    "test": "./node_modules/karma/bin/karma start karma.conf.js"
+  "scripts": {},
+  "engines": {
+		"npm": ">=7"
+	},
+  "dependencies": {
+    "@financial-times/o-icons": "^7.2.1"
   }
 }
